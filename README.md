@@ -29,7 +29,10 @@ Setup and populate database:
     # Populate database (optional)
     $ python db/populate.py
     
-Run application:
+How to use
+------------
+
+You can start the application by running it in any Python IDE or directly from terminal using the command:
 
     # Go to the project folder
     $ cd /vagrant/catalog
@@ -37,18 +40,10 @@ Run application:
     # Start application
     $ python app.py
     
-How to use/test
-------------
-
-You can see the file "tournament_test.py" from this repo where are all the methods you can use in this script.
-
-You can also test the script by running the application in any Python IDE or directly from terminal using the command:
-
-    python tournament_test.py
-    
 If everything runs well you will get the message:
 
-    Success!  All tests pass!
+    * Running on http://0.0.0.0:5000/
+    * Restarting with reloader
 
 Licensing
 ---------
@@ -59,7 +54,7 @@ Contacts
 --------
 
 o If you want to be informed about new code releases, bug fixes,
-security fixes, general news and information about the Tournament Manager project just keep tracking this repository.
+security fixes, general news and information about the White Market Games project just keep tracking this repository.
 
 o If you want freely available support for this script 
 or any kind of help just mail <hugophp@sapo.pt>
