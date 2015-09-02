@@ -1,20 +1,15 @@
-White Market Games  Version 1.0  07/31/2015
+White Market Games  Version 1.0  09/02/2015
 
 What is it?
 -----------
 
-Tournament Manager is a Python script that allow you to keep track of several 
-tournaments. Uses a PostgreSQL database to store tournaments, 
-players and matches using swiss pairings system. With Tournament 
-Manager you can quickly know the pairs list for each tournament round.
+White Market Games is an application where you can check the latest games on market and filter them by categories. You can also interact with the application by doing a login throw Google+ or Facebook. With an account you can add your own games, edit and delete it anytime you want.
 
 Requirements
 ------------
-To a full success use of Tournament Manager you need:
+To a full success use of White Market Games you need:
 
-    o PostgreSQL
     o Python 2.7
-    o psycopg2
 
 Installation
 ------------
@@ -32,7 +27,7 @@ Setup and populate database:
 How to use
 ------------
 
-You can start the application by running it in any Python IDE or directly from terminal using the command:
+You can start the application by running it in any Python IDE or directly from terminal using the commands:
 
     # Go to the project folder
     $ cd /vagrant/catalog
