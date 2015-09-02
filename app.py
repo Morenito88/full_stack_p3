@@ -1,5 +1,5 @@
 # Framework modules
-from flask import Flask, render_template, flash, request, redirect, url_for
+from flask import Flask, render_template, flash, request, redirect, url_for, jsonify
 from flask import session as login_session
 from flask import make_response
 from sqlalchemy import create_engine, asc, desc
@@ -10,6 +10,7 @@ import httplib2
 import json
 import random, string
 import requests
+import copy
 
 # Custom modules
 from db.setup import Base, User, Category, Item
@@ -322,6 +323,28 @@ def deleteItem(category_id, item_id):
 		return redirect(url_for('showItems', category_id=item.category_id))
 	else:
 		return render_template('deleteItem.html', category_id=category_id, item = item)	
+
+# JSON APIs to view Categories and Games information
+@app.route('/categories/JSON/')
+def allCategoriesJSON():
+    categories = session.query(Category).all()
+    jsonF = {}
+    for c in categories:
+        jsonF[c.name] = c.serialize
+        items = session.query(Item).filter_by(category_id=c.id).all()
+        jsonF[c.name]['Items'] = [i.serialize for i in items]
+    return jsonify(jsonF)
+
+@app.route('/items/JSON/')
+def allItemsJSON():
+    items = session.query(Item).all()
+    return jsonify(Items=[i.serialize for i in items])
+
+@app.route('/items/<int:item_id>/JSON/')
+def itemJSON(item_id):
+    item = session.query(Item).filter_by(
+        id=item_id).one()
+    return jsonify(Item=item.serialize)
 
 # Helpful functions
 def getRecestItems(total=5):
