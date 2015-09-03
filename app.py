@@ -20,7 +20,7 @@ from db.setup import Base, User, Category, Item
 # Instantiate a new Flask application
 app = Flask(__name__)
 
-# Instantiate cross-site request forgery protection 
+# Instantiate cross-site request forgery protection
 csrf = SeaSurf(app)
 
 # Connect to Database and create database session
