@@ -2,6 +2,7 @@
 from flask import Flask, render_template, flash, request, redirect, url_for, jsonify
 from flask import session as login_session
 from flask import make_response
+from flask.ext.seasurf import SeaSurf
 from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from oauth2client.client import flow_from_clientsecrets
@@ -18,6 +19,9 @@ from db.setup import Base, User, Category, Item
 
 # Instantiate a new Flask application
 app = Flask(__name__)
+
+# Instantiate cross-site request forgery protection 
+csrf = SeaSurf(app)
 
 # Connect to Database and create database session
 engine = create_engine('sqlite:///whitemarketgames.db')
@@ -69,6 +73,7 @@ def disconnect():
         return redirect(url_for('index'))
 
 
+@csrf.exempt
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
 
@@ -185,6 +190,7 @@ def gdisconnect():
         return response
 
 
+@csrf.exempt
 @app.route('/fbconnect', methods=['POST'])
 def fbconnect():
     if request.args.get('state') != login_session['state']:
@@ -277,7 +283,7 @@ def showCategories():
 # Show all items from a category
 
 
-@app.route('/categories/<int:category_id>/items')
+@app.route('/categories/<int:category_id>/items/')
 def showItems(category_id):
     categories = session.query(Category).order_by(asc(Category.name)).all()
     items = session.query(Item).filter_by(category_id=category_id).all()
